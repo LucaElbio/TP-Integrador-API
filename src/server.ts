@@ -1,6 +1,8 @@
-// Import the 'express' module
 import express, { Request, Response } from 'express';
-
+import { AppDataSource } from './db';
+import moviesRoutes from './routes/movies.routes';
+import categoriesRoutes from './routes/categories.routes';
+import platformsRoutes from './routes/platforms.routes';
 
 async function startServer() {
   // Create an Express application
@@ -8,12 +10,12 @@ async function startServer() {
   
   app.use(express.json());
   
-  app.use('/movie', moviesRoutes);
-  app.use('/category', categoriesRoutes);
-  app.use('/platoform', platformsRoutes);
+  app.use('/movies', moviesRoutes);
+  app.use('/categories', categoriesRoutes);
+  app.use('/platforms', platformsRoutes);
   
   // Set the port number for the server
-  const port: number = 3000;
+  const port: number = 3001;
   
   // Define a route for the root path ('/')
   app.get('/', (req, res) => {
@@ -41,3 +43,5 @@ async function startServer() {
 
   console.log('Database connected');
 }
+
+startServer();
