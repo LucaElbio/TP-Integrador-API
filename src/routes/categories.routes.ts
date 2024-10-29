@@ -3,6 +3,7 @@ import { CategoryController } from "../controllers/category.controller";
 
 const router = Router();
 
+router.get('/', CategoryController.getAll);
 router.post('/', CategoryController.addOrEdit);
 router.delete('/', CategoryController.delete);
 router.get('/:categoryId', CategoryController.get);

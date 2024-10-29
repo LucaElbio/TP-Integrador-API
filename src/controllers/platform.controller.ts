@@ -35,4 +35,8 @@ export class PlatformController extends BaseController {
             return res.status(200).send(await platformRepository.find());
         }
     }
+
+    static async getAll(req: Request, res: Response){
+        return res.status(200).send(await platformRepository.find());
+    }
 }

@@ -27,8 +27,12 @@ export class MovieController extends BaseController {
         }
     }
 
-    static async delete(req: Request, res: Response){
-        const movieId: number = req.body.movieId;
+    static async delete(req: Request, res: Response) {
+        const movieId: number = +req.params.movieId;
+        if (isNaN(movieId)) {
+            return res.status(400).send({ message: "Invalid movie ID" });
+        }
+
         await movieRepository.delete({ id: movieId });
         return res.status(200).send({ message: "Película eliminada correctamente" });
     }
@@ -40,5 +44,10 @@ export class MovieController extends BaseController {
         }else{
             return res.status(200).send(await movieRepository.find());
         }
+    }
+
+    static async getAll(req: Request, res: Response) {
+        const movies = await movieRepository.findWithRelations();
+        return res.status(200).send(movies);
     }
 }

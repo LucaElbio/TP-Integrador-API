@@ -33,4 +33,8 @@ export class CategoryController extends BaseController {
             return res.status(200).send(await categoryRepository.find());
         }
     }
+
+    static async getAll(req: Request, res: Response){
+        return res.status(200).send(await categoryRepository.find());
+    }
 }

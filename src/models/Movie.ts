@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, JoinColumn, OneToOne } from "typeorm"
+import { Entity, Column, PrimaryGeneratedColumn, JoinColumn, ManyToOne } from "typeorm"
 import { Category } from "./Category"
 import { Platform } from "./Platform"
 
@@ -16,11 +16,11 @@ export class Movie {
     @Column()
     minimumAge!: number
 
-    @OneToOne(() => Category)
+    @ManyToOne(() => Category, category => category.movies)
     @JoinColumn({ name: "categoryId" })
     category!: Category;
 
-    @OneToOne(() => Platform)
+    @ManyToOne(() => Platform, platform => platform.movies)
     @JoinColumn({ name: "platformId" })
     platform!: Platform;
 }
