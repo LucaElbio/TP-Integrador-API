@@ -12,7 +12,7 @@ export const AppDataSource = new DataSource({
     username: DB_USER,
     password: DB_PASSWORD,
     database: DB_NAME,
-    synchronize: true, // false on Prod
+    synchronize: false, // false on Prod
     logging: true,
     entities: [Movie, Category, Platform]
 });

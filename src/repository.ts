@@ -4,8 +4,8 @@ import { Category } from "../src/models/Category";
 import { Platform } from "../src/models/Platform";
 
 export const movieRepository = AppDataSource.getRepository(Movie).extend({
-    findWithRelations() {
-        return this.find({ relations: ['category', 'platform'] });
+    findWithRelations(id: number | undefined) {
+        return this.find({ relations: ['category', 'platform'], where: id ? { id } : {} });
     }
 });
 export const categoryRepository = AppDataSource.getRepository(Category);
