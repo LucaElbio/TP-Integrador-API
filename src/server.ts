@@ -7,6 +7,8 @@ import cors from 'cors';
 import moviesRoutes from './routes/movies.routes';
 import categoriesRoutes from './routes/categories.routes';
 import platformsRoutes from './routes/platforms.routes';
+import favoriteMoviesRoutes from './routes/favorite.movies.routes';
+import authRoutes from './routes/auth.routes';
 
 async function startServer() {
   const app = express();
@@ -22,8 +24,8 @@ async function startServer() {
   app.use('/movies', moviesRoutes);
   app.use('/categories', categoriesRoutes);
   app.use('/platforms', platformsRoutes);
-  app.use('/favorite-movies', platformsRoutes);
-  app.use('/users', platformsRoutes);
+  app.use('/favorite-movies', favoriteMoviesRoutes);
+  app.use('/auth', authRoutes);
   
   const port = process.env.PORT;
   

@@ -1,6 +1,6 @@
 import { Request, Response } from "express-serve-static-core";
 import { BaseController } from "./base.controller";
-import { categoryRepository, userRepository } from "../repository";
+import { userRepository } from "../repository";
 
 export class AuthController extends BaseController {
     static async login(req: Request, res: Response){
