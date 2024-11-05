@@ -1,6 +1,7 @@
-import { Entity, Column, PrimaryGeneratedColumn, JoinColumn, ManyToOne } from "typeorm"
+import { Entity, Column, PrimaryGeneratedColumn, JoinColumn, ManyToOne, OneToMany } from "typeorm"
 import { Category } from "./Category"
 import { Platform } from "./Platform"
+import { FavoriteMovie } from "./FavoriteMovie"
 
 @Entity({ name: "movies"})
 export class Movie {
@@ -23,4 +24,8 @@ export class Movie {
     @ManyToOne(() => Platform, platform => platform.movies)
     @JoinColumn({ name: "platformId" })
     platform!: Platform;
+
+    @OneToMany(() => FavoriteMovie, fav => fav.movie)
+    @JoinColumn({ name: "movieId" })
+    favoriteMovies!: FavoriteMovie[];
 }

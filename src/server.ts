@@ -22,22 +22,14 @@ async function startServer() {
   app.use('/movies', moviesRoutes);
   app.use('/categories', categoriesRoutes);
   app.use('/platforms', platformsRoutes);
+  app.use('/favorite-movies', platformsRoutes);
+  app.use('/users', platformsRoutes);
   
-  // Get the port from the environment variables
   const port = process.env.PORT;
-  
-  // Define a route for the root path ('/')
-  app.get('/', (req, res) => {
-    // Send a response to the client
-    res.send('Hello, TypeScript + Node.js + Express!');
-  });
-  
-  // Start the server and listen on the specified port
   
   await AppDataSource.initialize();
   
   const server = app.listen(port, () => {
-    // Log a message when the server is successfully running
     console.log(`⚡ Server is running on http://localhost:${port} ⚡`);
   });
 
