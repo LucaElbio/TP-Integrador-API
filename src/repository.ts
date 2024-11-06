@@ -12,5 +12,9 @@ export const movieRepository = AppDataSource.getRepository(Movie).extend({
 });
 export const categoryRepository = AppDataSource.getRepository(Category);
 export const platformRepository = AppDataSource.getRepository(Platform);
-export const favoriteMovieRepository = AppDataSource.getRepository(FavoriteMovie);
+export const favoriteMovieRepository = AppDataSource.getRepository(FavoriteMovie).extend({
+    findWithRelations(id: number | undefined) {
+        return this.find({ relations: ['movie.category', 'movie.platform'], where: id ? { id } : {} });
+    }
+});
 export const userRepository = AppDataSource.getRepository(User);

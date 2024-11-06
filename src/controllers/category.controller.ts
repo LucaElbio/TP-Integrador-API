@@ -21,8 +21,8 @@ export class CategoryController extends BaseController {
         return res.status(200).send({ message: "Categoría modificada correctamente" });
     }
 
-    static async delete(req: Request, res: Response){
-        const categoryId: number = req.body.categoryId;
+    static async delete(req: Request, res: Response) {
+        const categoryId: number = +req.params.categoryId;
         await categoryRepository.delete({ id: categoryId });
         return res.status(200).send({ message: "Categoría eliminada correctamente" });
     }

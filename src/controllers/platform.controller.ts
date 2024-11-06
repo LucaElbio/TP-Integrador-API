@@ -22,11 +22,19 @@ export class PlatformController extends BaseController {
             return res.status(200).send({ message: "Plataforma modificada correctamente" });
     }
 
-    static async delete(req: Request, res: Response){
-        const platformId: number = req.body.platformId;
-        await platformRepository.delete({ id: platformId });
-        return res.status(200).send({ message: "Plataforma eliminada correctamente" });
-    }
+    static async delete(req: Request, res: Response) {
+        const platformId: number = parseInt(req.params.platformId, 10);
+        if (isNaN(platformId)) {
+          return res.status(400).send({ message: "ID de plataforma inválido" });
+        }
+    
+        try {
+          await platformRepository.delete({ id: platformId });
+          return res.status(200).send({ message: "Plataforma eliminada correctamente" });
+        } catch (error) {
+          return res.status(500).send({ message: "Error eliminando la plataforma", error });
+        }
+      }
 
     static async get(req: Request, res: Response){
         const platformId: number | undefined = req.params.platformId ? +req.params.platformId : undefined;

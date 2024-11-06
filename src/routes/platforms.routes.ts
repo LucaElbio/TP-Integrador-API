@@ -6,6 +6,6 @@ router.get('/', PlatformController.get);
 router.get('/:platformId', PlatformController.get);
 router.post('/', PlatformController.add);
 router.put('/', PlatformController.edit);
-router.delete('/', PlatformController.delete);
+router.delete('/:platformId', PlatformController.delete);
 
 export default router;
