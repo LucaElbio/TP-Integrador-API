@@ -20,12 +20,10 @@ export class FavoriteMovieController extends BaseController {
     }
 
     static async get(req: Request, res: Response) {
-        const userId: number | undefined = req.query.userId ? +req.query.userId : undefined;
-        
+        const userId: number | undefined = req.params.userId ? +req.params.userId : undefined;
         if (!userId) {
             return res.status(400).send({ message: "User ID is required" });
         }
-
         try {
             const favorites = await favoriteMovieRepository.find({
                 relations: ['movie', 'movie.category', 'movie.platform'],

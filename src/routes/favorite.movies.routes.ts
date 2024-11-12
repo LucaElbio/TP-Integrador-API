@@ -3,7 +3,7 @@ import { FavoriteMovieController } from "../controllers/favorite.movie.controlle
 
 const router = Router();
 router.get('/', FavoriteMovieController.get);
-router.get('/:platformId', FavoriteMovieController.get);
+router.get('/:userId', FavoriteMovieController.get);
 router.post('/', FavoriteMovieController.add);
 router.delete('/', FavoriteMovieController.delete);
 

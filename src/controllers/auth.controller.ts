@@ -7,7 +7,7 @@ export class AuthController extends BaseController {
         const { email, password } = req.body as { email: string, password: string };
         const user = await userRepository.findOne({ where: { email, password }});
         if(user){
-            return res.status(200).send({ id: user.id, userName: `${user.lastName} ${user.firstName}` })
+            return res.status(200).send({ id: user.id, name: `${user.lastName} ${user.firstName}` })
         } else {
             return res.status(401).send({ message: "Usuario no registrado" })
         }

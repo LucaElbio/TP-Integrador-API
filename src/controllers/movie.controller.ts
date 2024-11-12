@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { BaseController } from "./base.controller";
-import { categoryRepository, movieRepository, platformRepository } from "../repository";
+import { categoryRepository, favoriteMovieRepository, movieRepository, platformRepository } from "../repository";
 
 export class MovieController extends BaseController {
     static async add(req: Request, res: Response){
@@ -35,8 +35,16 @@ export class MovieController extends BaseController {
     }
 
     static async get(req: Request, res: Response){
+        const userId: number = +req.params.userId
         const movieId: number | undefined = req.params.movieId ? +req.params.movieId : undefined;
-        return res.status(200).send(await movieRepository.findWithRelations(movieId));
-        
+        let movies = await movieRepository.findWithRelations(movieId)
+        const favoriteMovies = await favoriteMovieRepository.findBy({ userId })
+        movies = movies.map((m) => {
+            return {
+                ...m,
+                favorite: favoriteMovies.find((fv) => fv.movieId == m.id) ? true : false
+            }
+        })
+        return res.status(200).send(movies);
     }
 }
