@@ -12,6 +12,9 @@ export class Platform {
     @Column()
     url!: string
 
-    @OneToMany(() => Movie, movie => movie.platform)
+    @OneToMany(() => Movie, movie => movie.platform, {
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE"
+    })
     movies!: Movie[];
 }

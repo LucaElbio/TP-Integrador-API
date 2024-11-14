@@ -21,6 +21,9 @@ export class User {
     @Column()
     birthDate!: Date
 
-    @OneToMany(() => FavoriteMovie, fav => fav.movie)
+    @OneToMany(() => FavoriteMovie, fav => fav.movie, {
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE"
+    })
     favoriteMovies!: FavoriteMovie[];
 }

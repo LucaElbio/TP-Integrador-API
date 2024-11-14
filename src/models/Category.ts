@@ -9,6 +9,9 @@ export class Category {
     @Column()
     name!: string
 
-    @OneToMany(() => Movie, movie => movie.category)
+    @OneToMany(() => Movie, movie => movie.category, {
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE"
+    })
     movies!: Movie[];
 }
