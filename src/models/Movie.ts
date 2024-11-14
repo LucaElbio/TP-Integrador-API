@@ -17,15 +17,24 @@ export class Movie {
     @Column()
     minimumAge!: number
 
-    @ManyToOne(() => Category, category => category.movies)
+    @ManyToOne(() => Category, category => category.movies, {
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE"
+    })
     @JoinColumn({ name: "categoryId" })
     category!: Category;
 
-    @ManyToOne(() => Platform, platform => platform.movies)
+    @ManyToOne(() => Platform, platform => platform.movies, {
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE"
+    })
     @JoinColumn({ name: "platformId" })
     platform!: Platform;
 
-    @OneToMany(() => FavoriteMovie, fav => fav.movie)
+    @OneToMany(() => FavoriteMovie, fav => fav.movie, {
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE"
+    })
     @JoinColumn({ name: "movieId" })
     favoriteMovies!: FavoriteMovie[];
 }

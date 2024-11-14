@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToOne } from "typeorm"
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from "typeorm"
 import { Movie } from "./Movie";
 import { User } from "./User";
 
@@ -13,9 +13,15 @@ export class FavoriteMovie {
     @Column()
     userId!: number
 
-    @ManyToOne(() => Movie, movie => movie.favoriteMovies)
+    @ManyToOne(() => Movie, movie => movie.favoriteMovies, {
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE"
+    })
     movie!: Movie
 
-    @ManyToOne(() => User, user => user.favoriteMovies)
+    @ManyToOne(() => User, user => user.favoriteMovies, {
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE"
+    })
     user!: User
 }
